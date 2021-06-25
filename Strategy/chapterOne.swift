@@ -15,11 +15,17 @@ class FlyWithWings: FlyBehaviour {
     }
     
 } 
-class FlyNoWings: FlyBehaviour {
+class FlyNoWay: FlyBehaviour {
     func fly() {
         print("Duck can not fly")
     }
     
+}
+class FlyRocketPowered: FlyBehaviour {
+    func fly() {
+        print("DUck fly with Rocket")
+        
+    }
 }
 class Quack: QuackBehaviour {
     func quack() {
@@ -64,6 +70,14 @@ class Duck {
         print("Will perform Fly")
         flyBehaviour?.fly() 
     }
+
+    func setFlyBehaviour(fb: FlyBehaviour) {
+        flyBehaviour = fb 
+    }
+
+    func setQuackBehaviour(qb: QuackBehaviour) {
+        quackBehaviour = qb 
+    }
 }
 
 class MallardDuck: Duck {
@@ -79,6 +93,31 @@ class MallardDuck: Duck {
 
 }
 
+class ModelDuck: Duck {
+    override init(){
+        super.init() 
+        flyBehaviour = FlyNoWay() 
+        quackBehaviour = Quack()
+       
+    }
+
+    override func display() {
+        print("displaying model duck")
+        
+    }
+}
+
+class DuckCall: QuackBehaviour {
+    func quack() {
+        print("mimic the calls (quacks) of ducks")
+        
+    }
+}
 var ducky: Duck = MallardDuck()
 ducky.performFly()
 ducky.performQuack()
+
+var myDuckModel: Duck = ModelDuck() 
+myDuckModel.display()
+myDuckModel.performQuack()
+myDuckModel.performFly()
